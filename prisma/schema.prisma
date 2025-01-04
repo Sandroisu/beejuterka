@@ -4,11 +4,33 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+
+datasource db {
+  provider = "postgresql"      // или "mysql", "sqlite", "mongodb" и т.д.
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  price       Int
+  description String?
+}
+
+model Cart {
+  id          String   @id @default(uuid())
+  userId      String
+  items       CartItem[]
+}
+
+model CartItem {
+  id          String   @id @default(uuid())
+  productId   String
+  quantity    Int
+  cartId      String
+  cart        Cart     @relation(fields: [cartId], references: [id])
 }
