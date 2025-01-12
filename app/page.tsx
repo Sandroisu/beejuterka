@@ -1,6 +1,7 @@
 // app/page.tsx
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
+import Navbar from "../components/Navbar";
 
 export default async function HomePage() {
   // Получаем список продуктов из базы данных
@@ -8,6 +9,7 @@ export default async function HomePage() {
 
   return (
     <div className="pt-16 max-w-7xl mx-auto p-4">
+      <Navbar/>
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Список товаров</h1>
 
       {/* Сетка товаров */}
