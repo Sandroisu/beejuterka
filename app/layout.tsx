@@ -1,5 +1,6 @@
 
 import "./globals.css";
+import Navbar from '../components/Navbar';
 
 
 export default function RootLayout({
@@ -9,7 +10,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        <main className="pt-20 max-w-7xl mx-auto p-4">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
