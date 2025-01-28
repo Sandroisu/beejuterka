@@ -1,6 +1,9 @@
 
 import "./globals.css";
 import Navbar from '../components/Navbar';
+import { SessionProvider } from 'next-auth/react';
+
+import ClientLayout from '../components/ClientLayout';
 
 
 export default function RootLayout({
@@ -11,10 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <main className="pt-20 max-w-7xl mx-auto p-4">
+        <ClientLayout>
           {children}
-        </main>
+        </ClientLayout>
       </body>
     </html>
   );

@@ -2,11 +2,13 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { usePathname } from 'next/navigation';
+import { signIn, signOut, useSession } from 'next-auth/react';
+
 
 const Navbar = () => {
     const [nav, setNav] = useState(false);
     const pathname = usePathname();
-
+    const { data: session, status } = useSession();
 
     const links = [
         {
@@ -35,6 +37,18 @@ const Navbar = () => {
                             <Link href={link.href}>{link.name}</Link>
                         </li>
                     ))}
+                    {/* Кнопка входа/выхода */}
+                    {status === "loading" ? (
+                        <li className="px-4 cursor-pointer capitalize font-medium text-gray-300">Загрузка...</li>
+                    ) : session ? (
+                        <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200" onClick={() => signOut()}>
+                            Выйти
+                        </li>
+                    ) : (
+                        <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200" onClick={() => signIn()}>
+                            Войти
+                        </li>
+                    )}
                 </ul>
                 {/* Иконка мобильного меню */}
                 <div className="md:hidden z-10" onClick={() => setNav(!nav)}>
@@ -62,11 +76,16 @@ const Navbar = () => {
                                 </Link>
                             </li>
                         ))}
+                        {status !== "loading" && (
+                            <li className="px-4 cursor-pointer capitalize py-6 text-4xl" onClick={() => session ? signOut() : signIn()}>
+                                {session ? "Выйти" : "Войти"}
+                            </li>
+                        )}
                     </ul>
                 )}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Navbar;
