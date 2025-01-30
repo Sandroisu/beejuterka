@@ -1,9 +1,9 @@
+// components/Navbar.tsx
 'use client';
 import Link from "next/link";
 import React, { useState } from "react";
 import { usePathname } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
-
 
 const Navbar = () => {
     const [nav, setNav] = useState(false);
@@ -15,14 +15,13 @@ const Navbar = () => {
             id: 1,
             name: "Главная страница",
             href: "/",
-
         },
         {
             id: 2,
             name: "Каталог",
             href: "/products",
         }
-    ]
+    ];
 
     return (
         <div className="fixed top-0 w-full bg-black text-white z-50">
@@ -32,8 +31,8 @@ const Navbar = () => {
                 <ul className="hidden md:flex">
                     {links.map((link) => (
                         <li key={link.id} className={`px-4 cursor-pointer capitalize font-medium 
-                            ${pathname === link.href ? 'text-white border-b-2 border-white' : 'text-gray-300 hover:text-white hover:scale-105'} 
-                            duration-200`}>
+                ${pathname === link.href ? 'text-white border-b-2 border-white' : 'text-gray-300 hover:text-white hover:scale-105'} 
+                duration-200`}>
                             <Link href={link.href}>{link.name}</Link>
                         </li>
                     ))}
@@ -45,8 +44,8 @@ const Navbar = () => {
                             Выйти
                         </li>
                     ) : (
-                        <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200" onClick={() => signIn()}>
-                            Войти
+                        <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200">
+                            <Link href="/login">Войти</Link>
                         </li>
                     )}
                 </ul>
@@ -77,8 +76,10 @@ const Navbar = () => {
                             </li>
                         ))}
                         {status !== "loading" && (
-                            <li className="px-4 cursor-pointer capitalize py-6 text-4xl" onClick={() => session ? signOut() : signIn()}>
-                                {session ? "Выйти" : "Войти"}
+                            <li className="px-4 cursor-pointer capitalize py-6 text-4xl" onClick={() => session ? signOut() : () => setNav(false)}>
+                                <Link href={session ? '#' : '/login'} onClick={() => session ? signOut() : null}>
+                                    {session ? "Выйти" : "Войти"}
+                                </Link>
                             </li>
                         )}
                     </ul>
@@ -86,6 +87,6 @@ const Navbar = () => {
             </div>
         </div>
     );
-};
+}
 
 export default Navbar;
