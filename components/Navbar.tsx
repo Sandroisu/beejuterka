@@ -19,7 +19,7 @@ const Navbar = () => {
         {
             id: 2,
             name: "Каталог",
-            href: "/products",
+            href: "products",
         }
     ];
 
