@@ -20,6 +20,11 @@ const Navbar = () => {
             id: 2,
             name: "Каталог",
             href: "products",
+        },
+        {
+            id: 3,
+            name: "Корзина",
+            href: "cart",
         }
     ];
 
