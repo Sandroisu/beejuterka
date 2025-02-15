@@ -50,7 +50,7 @@ const Navbar = () => {
                         </li>
                     ) : (
                         <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200">
-                            <Link href="/login">Войти</Link>
+                            <Link href="/auth">Войти</Link>
                         </li>
                     )}
                 </ul>

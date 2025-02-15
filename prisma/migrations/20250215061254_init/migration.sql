@@ -1,4 +1,13 @@
 -- CreateTable
+CREATE TABLE "User" (
+    "id" BIGSERIAL NOT NULL,
+    "email" TEXT NOT NULL,
+    "name" TEXT,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Product" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -11,7 +20,7 @@ CREATE TABLE "Product" (
 -- CreateTable
 CREATE TABLE "Cart" (
     "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "userId" BIGINT NOT NULL,
 
     CONSTRAINT "Cart_pkey" PRIMARY KEY ("id")
 );
@@ -25,6 +34,15 @@ CREATE TABLE "CartItem" (
 
     CONSTRAINT "CartItem_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Cart_userId_key" ON "Cart"("userId");
+
+-- AddForeignKey
+ALTER TABLE "Cart" ADD CONSTRAINT "Cart_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "CartItem" ADD CONSTRAINT "CartItem_cartId_fkey" FOREIGN KEY ("cartId") REFERENCES "Cart"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
