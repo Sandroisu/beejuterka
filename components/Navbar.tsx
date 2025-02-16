@@ -82,7 +82,7 @@ const Navbar = () => {
                         ))}
                         {status !== "loading" && (
                             <li className="px-4 cursor-pointer capitalize py-6 text-4xl" onClick={() => session ? signOut() : () => setNav(false)}>
-                                <Link href={session ? '#' : '/login'} onClick={() => session ? signOut() : null}>
+                                <Link href={session ? '#' : '/auth'} onClick={() => session ? signOut() : null}>
                                     {session ? "Выйти" : "Войти"}
                                 </Link>
                             </li>
