@@ -11,17 +11,27 @@ export default function LoginPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const result = await signIn('credentials', {
-            redirect: false,
-            email,
-            password,
-        });
+        setError('');
 
-        if (result?.error) {
-            setError(result.error);
-        } else {
-            // Перенаправление на главную страницу после успешной аутентификации
-            window.location.href = '/';
+        try {
+            const response = await fetch('/api/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Ошибка авторизации');
+            }
+
+            // Успешная авторизация
+            window.location.href = '/'; // Перенаправляем на главную страницу
+        } catch (err) {
+            setError(err.message || 'Произошла ошибка при авторизации');
         }
     };
 
