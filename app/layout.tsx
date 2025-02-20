@@ -1,6 +1,6 @@
 
 import "./globals.css";
-
+import { playfairDisplay } from '@/app/ui/fonts';
 import ClientLayout from '../components/ClientLayout';
 
 
@@ -11,7 +11,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${playfairDisplay.className} antialiased`}>
         <ClientLayout>
           {children}
         </ClientLayout>
