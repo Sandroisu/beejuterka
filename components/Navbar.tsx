@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { usePathname } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { rubik } from '@/app/ui/fonts';
 
 const Navbar = () => {
     const [nav, setNav] = useState(false);
@@ -30,7 +31,7 @@ const Navbar = () => {
 
     return (
         <div className="fixed top-0 w-full bg-black text-white z-50">
-            <div className="max-w-7xl mx-auto h-20 px-4 flex justify-between items-center">
+            <div className={`max-w-7xl mx-auto h-20 px-4 flex justify-between items-center ${rubik.className} antialiased`}>
                 <h1 className="text-2xl font-bold">Магазин Бижутерии</h1>
                 {/* Десктоп меню */}
                 <ul className="hidden md:flex">
