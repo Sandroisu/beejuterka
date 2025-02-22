@@ -9,8 +9,17 @@ export default async function HomePage() {
         <Image
           src="/resources/images/main_screen_pic_1.jpg"
           alt="Main screen pic"
-          width={1200}
-          height={800}
+          className="hidden md:block"
+          width={1000}
+          height={760}
+          layout="intrinsic"
+        />
+        <Image
+          src="/resources/images/main_screen_pic_1.jpg"
+          alt="Main screen pic"
+          className="block md:hidden"
+          width={560}
+          height={620}
           layout="intrinsic"
         />
       </div>

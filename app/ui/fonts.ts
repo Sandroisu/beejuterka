@@ -1,7 +1,7 @@
-import { Playfair_Display } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import { Rubik } from 'next/font/google';
 
-export const playfairDisplay = Playfair_Display({
+export const roboto = Roboto({
     weight: ['400', '700'],
     subsets: ['latin', 'cyrillic'],
 });
