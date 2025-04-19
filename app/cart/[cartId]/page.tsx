@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-export default async function CartPage() {
+export default async function CartPage({ params }: { params: { cartId: string } }) {
+    const { cartId } = params;
     const res = await fetch('http://localhost:3000/api/cart', {
         cache: 'no-store'
     });
