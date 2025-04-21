@@ -22,7 +22,7 @@ export const POST = NextAuth({
                     where: { email: credentials.email },
                 });
 
-                if (!user || user.password !== credentials.password) {
+                if (!user || user.name !== credentials.password) {
                     throw new Error('Invalid email or password');
                 }
 

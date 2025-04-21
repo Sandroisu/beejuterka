@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma';
 export async function GET() {
     const cart = await prisma.cart.findFirst({
         where: {
-            userId: "dsfsdf"
+            userId: 1
         }
     });
     return NextResponse.json(cart);
