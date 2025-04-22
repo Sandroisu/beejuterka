@@ -13,7 +13,7 @@ export const POST = NextAuth({
                 email: { label: 'Email', type: 'email', placeholder: 'your-email@example.com' },
                 password: { label: 'Password', type: 'password' },
             },
-            async authorize(credentials) {
+            async authorize(credentials, req): Promise<any> {
                 if (!credentials?.email || !credentials.password) {
                     throw new Error('Email and password are required');
                 }
@@ -22,7 +22,7 @@ export const POST = NextAuth({
                     where: { email: credentials.email },
                 });
 
-                if (!user || user.name !== credentials.password) {
+                if (!user || user.password !== credentials.password) {
                     throw new Error('Invalid email or password');
                 }
 
