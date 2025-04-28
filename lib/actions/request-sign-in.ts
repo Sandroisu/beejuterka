@@ -1,7 +1,7 @@
 "use server"
 
 import { signIn } from "@/auth";
-import { redirect } from "@next/navigation";
+import { redirect } from "next/navigation";
 import { error } from "console";
 
 type SignInState = { error?: string };
@@ -20,7 +20,7 @@ export async function requestSignIn(state: SignInState, formData: FormData) {
 
     if (result?.error) {
         return { error: result.error }
-    }// need to finish this latwer
+    }
 
 
     redirect(callbackUrl);
