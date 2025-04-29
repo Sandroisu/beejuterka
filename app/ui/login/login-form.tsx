@@ -3,13 +3,15 @@
 import { rubik } from '@/app/ui/fonts';
 import { useActionState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { requestSignIn, SignInState } from '@/lib/actions/request-sign-in';
 
 export default function LoginForm() {
     const searchParams = useSearchParams();
-    const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
-    const [errorMessage, formAction, isPending] = useActionState(
-        () => { },
-        undefined,
+    const callbackUrl = searchParams.get('callbackUrl') || '/'
+    const initalState: SignInState = { error: "" }
+    const [state, formAction, isPending] = useActionState<SignInState, FormData>(
+        requestSignIn,
+        initalState,
     );
 
     return (
@@ -61,6 +63,8 @@ export default function LoginForm() {
                 <button className="mt-4 w-full" aria-disabled={isPending}>
                     Log in
                 </button>
+
+                {state?.error && (<p className="text-red-600">{state.error}</p>)}
                 <div
                     className="flex h-8 items-end space-x-1"
                     aria-live="polite"
