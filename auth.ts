@@ -1,6 +1,5 @@
 
 import NextAuth from 'next-auth';
-console.log("NextAuth()", NextAuth)
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from '@/lib/prisma';
@@ -38,4 +37,3 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     secret: process.env.AUTH_SECRET,
 });
-console.log("✅ NextAuth handlers:", typeof handlers, "signIn:", typeof signIn);
