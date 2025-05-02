@@ -18,7 +18,7 @@ export default function LoginForm() {
         <form action={formAction} className="space-y-3">
             <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
                 <h1 className={`${rubik.className} mb-3 text-2xl`}>
-                    Please log in to continue.
+                    Авторизуйтесь чтобы продолжить
                 </h1>
                 <div className="w-full">
                     <div>
@@ -61,7 +61,7 @@ export default function LoginForm() {
                 </div>
                 <input type="hidden" name="redirectTo" value={callbackUrl} />
                 <button className="mt-4 w-full" aria-disabled={isPending}>
-                    Log in
+                    Войти
                 </button>
 
                 {state?.error && (<p className="text-red-600">{state.error}</p>)}
