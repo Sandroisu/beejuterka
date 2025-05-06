@@ -7,10 +7,10 @@ import { error } from "console";
 export interface SignInState { error?: string };
 
 export async function requestSignIn(state: SignInState, formData: FormData): Promise<SignInState> {
+    console.log(formData)
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const callbackUrl = (formData.get("redirectTo") as string) || "/";
-
     const result = await signIn("credentials", {
         email,
         password,
