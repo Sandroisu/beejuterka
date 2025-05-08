@@ -1,8 +1,9 @@
 
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from '@/lib/prisma';
+import { AuthError } from 'next-auth';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 
@@ -16,7 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             async authorize(credentials, req): Promise<any> {
                 if (!credentials?.email || !credentials.password) {
-                    throw new Error('Email and password are required');
+                    throw new AuthError('Email and password are required');
                 }
                 const mail = credentials.email
                 console.log(credentials.email)
@@ -25,7 +26,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 });
 
                 if (!user || user.password !== credentials.password) {
-                    throw new Error('Invalid email or password');
+                    throw new AuthError('Invalid email or password');
                 }
 
                 return user;

@@ -2,7 +2,6 @@
 
 import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
-import { error } from "console";
 import { AuthError } from "next-auth";
 
 export interface SignInState { error?: string };
@@ -22,15 +21,13 @@ export async function requestSignIn(state: SignInState, formData: FormData): Pro
         if (result?.error) {
             return { error: result.error }
         }
-    } catch (e) {// error under useUnknownInCatchVariables 
-        if (typeof e === "string") {
-            return { error: e } // works, `e` narrowed to string
-        } else if (e instanceof Error) {
-            return { error: e.message }// works, `e` narrowed to Error
+    } catch (e) {
+        if (e instanceof AuthError) {
+            return { error: e.message };
         }
+        throw e;
+
     }
-
-
 
     redirect(callbackUrl);
 }
