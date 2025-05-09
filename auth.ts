@@ -17,16 +17,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             async authorize(credentials, req): Promise<any> {
                 if (!credentials?.email || !credentials.password) {
-                    throw new AuthError('Email and password are required');
+                    throw new AuthError('Требуется ввести логин и пароль');
                 }
-                const mail = credentials.email
+                const mail = credentials.email as string
                 console.log(credentials.email)
                 const user = await prisma.user.findUnique({
                     where: { email: mail },
                 });
 
                 if (!user || user.password !== credentials.password) {
-                    throw new AuthError('Invalid email or password');
+                    throw new AuthError('Неверный логин или пароль');
                 }
 
                 return user;
