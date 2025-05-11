@@ -4,7 +4,10 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   const products = await prisma.product.findMany();
-  return NextResponse.json(products);
+  return NextResponse.json(products, {
+    status: 200,
+    headers: { 'accept-language': `ru` },
+  });
 }
 
 export async function POST(request: Request) {
