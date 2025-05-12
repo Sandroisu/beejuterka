@@ -4,6 +4,7 @@ import { rubik } from '@/app/ui/fonts';
 import { useActionState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { requestSignIn, SignInState } from '@/lib/actions/request-sign-in';
+import Link from "next/link"
 
 export default function LoginForm() {
     const searchParams = useSearchParams();
@@ -63,6 +64,12 @@ export default function LoginForm() {
                 <button className="mt-4 w-full" aria-disabled={isPending}>
                     Войти
                 </button>
+                <Link
+                    href="/register"
+                    className="mt-4 block w-full text-center py-2 border border-gray-300 rounded-md hover:bg-gray-100"
+                >
+                    Регистрация
+                </Link>
 
                 {state?.error && (<p className="text-red-600">{state.error}</p>)}
                 <div
