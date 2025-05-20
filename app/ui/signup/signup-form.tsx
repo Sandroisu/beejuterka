@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
-import { requestSignUp, SignUpState } from "@/app/actions/request-sign-up";
+import { requestSignUp, SignUpState } from "@/lib/actions/request-sign-up";
 
 export default function RegisterForm() {
     const initial: SignUpState = { error: "" };
