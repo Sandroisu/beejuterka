@@ -4,11 +4,11 @@ import { hash } from "bcryptjs";
 import { prisma } from '@/lib/prisma';
 import { redirect } from "next/navigation";
 
-export interface SingUpState {
+export interface SignUpState {
     error?: string
 }
 
-export async function requestSignUp(state: SingUpState, formData: FormData): Promise<SingUpState> {
+export async function requestSignUp(state: SignUpState, formData: FormData): Promise<SignUpState> {
     const email = formData.get("email") as string;
     const name = (formData.get("name") as string)?.trim || null;
     const password = formData.get("password") as string;
