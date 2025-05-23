@@ -16,7 +16,7 @@ export async function requestSignUp(state: SignUpState, formData: FormData): Pro
     const redirectTo = (formData.get("redirectTo") as string) || "/auth";
 
     if (!email || !password || password.length < 6) {
-        return { error: "Email и пароль необходимы (минимум 6 символов)" };
+        return { error: "Необходимо ввести email и пароль(минимум 6 символов)" };
     }
 
     if (password !== confirm) {
