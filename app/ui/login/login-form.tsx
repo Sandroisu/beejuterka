@@ -64,12 +64,12 @@ export default function LoginForm() {
                 <button className="mt-4 w-full" aria-disabled={isPending}>
                     Войти
                 </button>
-                <Link
-                    href="/register"
-                    className="mt-4 block w-full text-center py-2 border border-gray-300 rounded-md hover:bg-gray-100"
-                >
-                    Регистрация
-                </Link>
+                <p className="mt-2 text-center text-sm">
+                    Нет аккаунта?{" "}
+                    <Link href="/registration" className="text-blue-600 underline">
+                        Зарегистрироваться
+                    </Link>
+                </p>
 
                 {state?.error && (<p className="text-red-600">{state.error}</p>)}
                 <div
