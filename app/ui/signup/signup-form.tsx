@@ -1,4 +1,3 @@
-// src/app/ui/register/register-form.tsx
 "use client";
 
 import Link from "next/link";

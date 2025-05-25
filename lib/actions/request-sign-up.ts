@@ -10,7 +10,7 @@ export interface SignUpState {
 
 export async function requestSignUp(state: SignUpState, formData: FormData): Promise<SignUpState> {
     const email = formData.get("email") as string;
-    const name = (formData.get("name") as string)?.trim || null;
+    const name = formData.get("name") as string;
     const password = formData.get("password") as string;
     const confirm = formData.get("confirm") as string;
     const redirectTo = (formData.get("redirectTo") as string) || "/auth";
@@ -33,7 +33,7 @@ export async function requestSignUp(state: SignUpState, formData: FormData): Pro
         data: {
             email: email,
             password: hashed,
-            name: name()
+            name: name
         }
     });
 
