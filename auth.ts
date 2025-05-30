@@ -4,6 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from '@/lib/prisma';
 import { AuthError } from 'next-auth';
+import bcrypt from 'bcryptjs';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 
@@ -20,15 +21,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     throw new AuthError('Требуется ввести логин и пароль');
                 }
                 const mail = credentials.email as string
+                const password = credentials.password as string
                 console.log(credentials.email)
                 const user = await prisma.user.findUnique({
                     where: { email: mail },
                 });
 
-                if (!user || user.password !== credentials.password) {
-                    throw new AuthError('Неверный логин или пароль');
+                if (!user) {
+                    throw new AuthError('Пользователь не найден');
                 }
-
+                const passwordMatch = await bcrypt.compare(password, user.password);
                 return user;
             },
         }),
