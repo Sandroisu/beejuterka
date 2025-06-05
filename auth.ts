@@ -31,6 +31,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     throw new AuthError('Пользователь не найден');
                 }
                 const passwordMatch = await bcrypt.compare(password, user.password);
+                if (!passwordMatch) {
+                    throw new AuthError("Неправильный логин или пароль")
+                }
                 return user;
             },
         }),
