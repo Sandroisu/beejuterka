@@ -32,7 +32,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 }
                 const passwordMatch = await bcrypt.compare(password, user.password);
                 if (!passwordMatch) {
-                    throw new AuthError("Неправильный логин или пароль")
+                    throw new AuthError("Неправильная пара логин пароль")
                 }
                 return user;
             },
