@@ -47,7 +47,7 @@ const Navbar = () => {
                         <li className="px-4 cursor-pointer capitalize font-medium text-gray-300">Загрузка...</li>
                     ) : session ? (
                         <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200" onClick={() => signOut()}>
-                            Выйти
+                            <Link href="/auth/signout">Выйти</Link>
                         </li>
                     ) : (
                         <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200">
