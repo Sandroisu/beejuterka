@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { usePathname } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { rubik } from '@/app/ui/fonts';
+import LogoutButton from "./LogoutButton";
 
 const Navbar = () => {
     const [nav, setNav] = useState(false);
@@ -45,9 +46,9 @@ const Navbar = () => {
                     {/* Кнопка входа/выхода */}
                     {status === "loading" ? (
                         <li className="px-4 cursor-pointer capitalize font-medium text-gray-300">Загрузка...</li>
-                    ) : session ? (
+                    ) : session?.user ? (
                         <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200" onClick={() => signOut()}>
-                            <Link href="/auth/signout">Выйти</Link>
+                            <LogoutButton />
                         </li>
                     ) : (
                         <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200">
