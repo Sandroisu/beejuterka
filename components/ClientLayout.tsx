@@ -8,7 +8,9 @@ interface ClientLayoutProps {
 
 const ClientLayout = ({ children }: ClientLayoutProps) => {
     return (
-        <SessionProvider>
+        <SessionProvider
+            refetchOnWindowFocus={true}
+            refetchInterval={60 * 5}>
             <Navbar />
             <main className="pt-20 max-w-7xl mx-auto p-4">
                 {children}

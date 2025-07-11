@@ -1,7 +1,7 @@
 // components/Navbar.tsx
 'use client';
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usePathname } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { rubik } from '@/app/ui/fonts';
@@ -10,7 +10,10 @@ import LogoutButton from "./LogoutButton";
 const Navbar = () => {
     const [nav, setNav] = useState(false);
     const pathname = usePathname();
-    const { data: session, status } = useSession();
+    const { data: session, status } = useSession(); // Добавлен update
+
+    // Добавьте этот useEffect для отслеживания изменений сессии
+
 
     const links = [
         {
@@ -47,7 +50,7 @@ const Navbar = () => {
                     {status === "loading" ? (
                         <li className="px-4 cursor-pointer capitalize font-medium text-gray-300">Загрузка...</li>
                     ) : session?.user ? (
-                        <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200" onClick={() => signOut()}>
+                        <li className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white hover:scale-105 duration-200">
                             <LogoutButton />
                         </li>
                     ) : (

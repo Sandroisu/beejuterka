@@ -1,7 +1,6 @@
 "use server"
 
 import { signIn } from "@/auth";
-import { redirect } from "next/navigation";
 import { AuthError } from "next-auth";
 
 export interface SignInState { error?: string };
@@ -29,5 +28,5 @@ export async function requestSignIn(state: SignInState, formData: FormData): Pro
 
     }
 
-    redirect(callbackUrl);
+    return { error: '' };
 }

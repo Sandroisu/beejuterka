@@ -1,22 +1,41 @@
 'use client';
 
 import { rubik } from '@/app/ui/fonts';
-import { useActionState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useActionState, useState, useTransition } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { requestSignIn, SignInState } from '@/lib/actions/request-sign-in';
 import Link from "next/link"
+import { start } from 'repl';
 
 export default function LoginForm() {
+    const router = useRouter()
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get('callbackUrl') || '/'
-    const initalState: SignInState = { error: "" }
-    const [state, formAction, isPending] = useActionState<SignInState, FormData>(
-        requestSignIn,
-        initalState,
-    );
+    const initialState: SignInState = { error: "" }
+    const [error, setError] = useState('')
+    const [pending, startTransition] = useTransition()
+    //const [state, formAction, isPending] = useActionState<SignInState, FormData>(
+    //  requestSignIn,
+    //initalState,
+    //);
+    const action = (formData: FormData) => {
+        startTransition(async () => {
+            const res = await requestSignIn({}, formData)
+            if (res.error) {
+                const err = res.error || ""
+                setError(err)
+            } else {
+                setError('')
+                router.push('/');
+                router.refresh();
+                window.location.href = callbackUrl;
+            }
+        })
+    }
+
 
     return (
-        <form action={formAction} className="space-y-3">
+        <form action={action} className="space-y-3">
             <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
                 <h1 className={`${rubik.className} mb-3 text-2xl`}>
                     Авторизуйтесь чтобы продолжить
@@ -61,7 +80,7 @@ export default function LoginForm() {
                     </div>
                 </div>
                 <input type="hidden" name="redirectTo" value={callbackUrl} />
-                <button className="mt-4 w-full" aria-disabled={isPending}>
+                <button className="mt-4 w-full" aria-disabled={pending}>
                     Войти
                 </button>
                 <p className="mt-2 text-center text-sm">
@@ -71,7 +90,7 @@ export default function LoginForm() {
                     </Link>
                 </p>
 
-                {state?.error && (<p className="text-red-600">{state.error}</p>)}
+                {error && (<p className="text-red-600">{error}</p>)}
                 <div
                     className="flex h-8 items-end space-x-1"
                     aria-live="polite"
