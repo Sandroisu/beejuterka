@@ -5,13 +5,11 @@ import { useActionState, useState, useTransition } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { requestSignIn, SignInState } from '@/lib/actions/request-sign-in';
 import Link from "next/link"
-import { start } from 'repl';
 
 export default function LoginForm() {
     const router = useRouter()
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get('callbackUrl') || '/'
-    const initialState: SignInState = { error: "" }
     const [error, setError] = useState('')
     const [pending, startTransition] = useTransition()
     //const [state, formAction, isPending] = useActionState<SignInState, FormData>(
