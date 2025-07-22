@@ -1,9 +1,9 @@
 // components/Navbar.tsx
 'use client';
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { usePathname } from 'next/navigation';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { rubik } from '@/app/ui/fonts';
 import LogoutButton from "./LogoutButton";
 

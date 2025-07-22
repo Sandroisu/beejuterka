@@ -12,10 +12,7 @@ export default function LoginForm() {
     const callbackUrl = searchParams.get('callbackUrl') || '/'
     const [error, setError] = useState('')
     const [pending, startTransition] = useTransition()
-    //const [state, formAction, isPending] = useActionState<SignInState, FormData>(
-    //  requestSignIn,
-    //initalState,
-    //);
+
     const action = (formData: FormData) => {
         startTransition(async () => {
             const res = await requestSignIn({}, formData)
