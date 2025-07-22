@@ -1,4 +1,6 @@
+import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+
 
 export default async function CartPage({ params }: { params: { cartId: string } }) {
     const { cartId } = params;
@@ -6,7 +8,7 @@ export default async function CartPage({ params }: { params: { cartId: string } 
         cache: 'no-store'
     });
     if (!res.ok) {
-        throw new Error('Failed to fetch products');
+        throw new Error('Failed to fetch cart data');
     }
     const cartItems = await res.json();
     return (

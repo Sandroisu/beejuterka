@@ -1,4 +1,3 @@
-// components/Navbar.tsx
 'use client';
 import Link from "next/link";
 import React, { useState } from "react";
@@ -10,10 +9,7 @@ import LogoutButton from "./LogoutButton";
 const Navbar = () => {
     const [nav, setNav] = useState(false);
     const pathname = usePathname();
-    const { data: session, status } = useSession(); // Добавлен update
-
-    // Добавьте этот useEffect для отслеживания изменений сессии
-
+    const { data: session, status } = useSession();
 
     const links = [
         {
