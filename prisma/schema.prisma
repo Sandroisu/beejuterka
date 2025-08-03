@@ -4,9 +4,8 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-
 datasource db {
-  provider = "postgresql"      // или "mysql", "sqlite", "mongodb" и т.д.
+  provider = "postgresql" // или "mysql", "sqlite", "mongodb" и т.д.
   url      = env("DATABASE_URL")
 }
 
@@ -15,31 +14,33 @@ generator client {
 }
 
 model User {
-  id    BigInt @id @default(autoincrement()) 
-  email String @unique
+  id       BigInt  @id @default(autoincrement())
+  email    String  @unique
   password String
-  name  String?
-  cart  Cart?
+  name     String?
+  cart     Cart?
 }
 
 model Product {
-  id          String   @id @default(uuid())
+  id          String     @id @default(uuid())
   name        String
   price       Int
   description String?
+  CartItem    CartItem[]
 }
 
 model Cart {
-  id          String   @id @default(uuid())
-  userId      BigInt   @unique
-  user        User     @relation(fields: [userId], references: [id])
-  items       CartItem[]
+  id     String     @id @default(uuid())
+  userId BigInt     @unique
+  user   User       @relation(fields: [userId], references: [id])
+  items  CartItem[]
 }
 
 model CartItem {
-  id          String   @id @default(uuid())
-  productId   String
-  quantity    Int
-  cartId      String
-  cart        Cart     @relation(fields: [cartId], references: [id])
+  id        String  @id @default(uuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  cartId    String
+  cart      Cart    @relation(fields: [cartId], references: [id])
 }
